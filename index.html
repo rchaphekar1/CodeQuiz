@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <script src="script.js"></script>
+    <div>
+        <h1 id="big-text">Coding Quiz Challenge</h1>
+    </div>
+    <div id="p-text">
+        <p id="intro">Answer the following questions related to coding materials covered so far. Try to get a high score!</p>
+    </div>
+    <div>
+        <button type="button" id="main-button" class="btn btn-primary btn-lg">Start Quiz</button>
+    </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#main-button").on("click", function(event) {
+                event.preventDefault();
+                var bigText = $("#big-text");
+                bigText.text("Question 1");
+                var pText = $("#p-text");
+                var answerOne = $('<button type="button" id="answer-button" class="btn btn-primary btn-md">Answer One</button>');
+                var answerTwo = $('<button type="button" id="answer-button" class="btn btn-primary btn-md">Answer Two</button>');
+                var answerThree = $('<button type="button" id="answer-button" class="btn btn-primary btn-md">Answer Three</button>');
+                var answerFour = $('<button type="button" id="answer-button" class="btn btn-primary btn-md">Answer Four</button>');
+                $("#intro").remove();
+                pText.append(answerOne);
+                pText.append("<br>")
+                pText.append(answerTwo);
+                pText.append("<br>")
+                pText.append(answerThree);
+                pText.append("<br>")
+                pText.append(answerFour);
+                pText.append("<br>")
+            });
+        })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
