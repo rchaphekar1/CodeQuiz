@@ -47,11 +47,15 @@
         body {
             text-align: center;
         }
+        #timer {
+            display: inline;
+        }
     </style>
 </head>
 <body>
     <div>
         <h1 id="big-text">Coding Quiz Challenge</h1>
+        <p id="timer"></p>;
     </div>
     <div>
         <p id="intro">Answer the following questions related to coding materials covered so far. Try to get a high score!</p>
@@ -75,12 +79,14 @@
     
     <script type="text/javascript">
         $(document).ready(function() {
-            var questionArray = ["Question 1", "Question 2", "Question 3", "Question 4", "Question 5"];
-            var answerOneArray = ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"];
-            var answerTwoArray = ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"];
-            var answerThreeArray = ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"];
-            var answerFourArray = ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"];
+            var questionArray = ["Commonly used data types do NOT include:", "The condition of an if/else is enclosed within:", "String values must be enclosed within ___ when being assigned to variables.", "Arrays in Javascript can be used to store ____.", "A very useful tool used during development and debugging for printing content to the debugger is:"];
+            var answerOneArray = ["alerts", "quotes", "parentheses", "Booleans", "console.log"];
+            var answerTwoArray = ["Booleans", "parantheses", "square brackets", "other arrays", "for loop"];
+            var answerThreeArray = ["strings", "curly brackets", "quotes", "numbers and strings", "while loop"];
+            var answerFourArray = ["numbers", "square brackets", "curly brackets", "all of the above", "if/else statements"];
             var correctAnswers = [1, 2, 3, 4, 1];
+            var secondsLeft = 50;
+            var score = 0;
             var i = 0;
             function nextQuestion() {
                 $("#big-text").text(questionArray[i]);
@@ -101,17 +107,30 @@
             };
             function endScreen() {
                 $("#big-text").text("All done!");
-                $("#intro").text("Your final score is: ");
+                score = secondsLeft;
+                $("#intro").text("Your final score is: " + score);
                 $("#submit-form").css("display", "inline");
                 $("#answer-button-one").remove();
                 $("#answer-button-two").remove();
                 $("#answer-button-three").remove();
                 $("#answer-button-four").remove();
                 $("#replay-button").css("display", "inline");
+                $("#timer").remove();
+            };
+            function setTime() {
+                var timerInterval = setInterval(function() {
+                    secondsLeft--;
+                    $("#timer").text("Time Remaining: " + secondsLeft + " seconds");
+                    if (secondsLeft === 0) {
+                        clearInterval(timerInterval);
+                        endScreen();
+                    };
+                }, 1000);
             }
             $("#main-button").on("click", function(event) {
                 event.preventDefault();
                 nextQuestion();
+                setTime();
             });
             $("#answer-button-one").on("click", function(event) {
                 event.preventDefault();
@@ -121,6 +140,7 @@
                 } else {
                     $("#right").css("visibility", "hidden");
                     $("#wrong").css("visibility", "visible");
+                    secondsLeft -= 10;
                 };
                 i++;
                 if (i < 5) {
@@ -137,6 +157,7 @@
                 } else {
                     $("#right").css("visibility", "hidden");
                     $("#wrong").css("visibility", "visible");
+                    secondsLeft -= 10;
                 };
                 i++;
                 if (i < 5) {
@@ -153,6 +174,7 @@
                 } else {
                     $("#right").css("visibility", "hidden");
                     $("#wrong").css("visibility", "visible");
+                    secondsLeft -= 10;
                 };
                 i++;
                 if (i < 5) {
@@ -169,6 +191,7 @@
                 } else {
                     $("#right").css("visibility", "hidden");
                     $("#wrong").css("visibility", "visible");
+                    secondsLeft -= 10;
                 };
                 i++;
                 if (i < 5) {
@@ -179,7 +202,18 @@
             });
             $("#submit-button").on("click", function(event) {
                 event.preventDefault();
-            })
+                var userInitials = $("#initials").val();
+                console.log(userInitials);
+                console.log(score);
+                localStorage.setItem("initials", userInitials);
+                localStorage.setItem("highscore", score);
+                highscores();
+                function highscores() {
+                    var initials = localStorage.getItem("initials");
+                    var highScore = localStorage.getItem("highscore");
+                    alert("Your highscore is: " + highScore);
+                };
+            });
             $("#replay-button").on("click", function(event) {
                 event.preventDefault();
                 location.reload();
