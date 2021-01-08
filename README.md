@@ -5,3 +5,4 @@
 ![Screenshot](CodeQuiz.png?raw=true "Code Quiz Screenshot")
 
 https://github.com/rchaphekar1/CodeQuiz
+https://rchaphekar1.github.io/CodeQuiz/
